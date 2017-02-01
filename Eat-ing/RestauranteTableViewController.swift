@@ -219,8 +219,10 @@ class RestauranteTableViewController: UITableViewController, NSFetchedResultsCon
     
     //FetchResult Methods
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
+        tableView.beginUpdates() //Aqui le dices, vamos a cambiar datos estate atenta para actualizarte
     }
+    
+    //Cada vez que hagamos algo en la bse de datos se llamaraa a este metodo
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert: //que estemos insertando un dato en nuestra tabla
@@ -242,5 +244,9 @@ class RestauranteTableViewController: UITableViewController, NSFetchedResultsCon
         
             restaurants = fetchedObjects as! [RestauranteMO]
         }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates() //Ya no tienes que estar mas atenta.©©©©©
     }
 }
